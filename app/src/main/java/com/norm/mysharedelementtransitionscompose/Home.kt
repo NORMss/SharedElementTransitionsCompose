@@ -1,4 +1,5 @@
-@file:OptIn(ExperimentalSharedTransitionApi::class, ExperimentalSharedTransitionApi::class,
+@file:OptIn(
+    ExperimentalSharedTransitionApi::class, ExperimentalSharedTransitionApi::class,
     ExperimentalSharedTransitionApi::class
 )
 
@@ -6,6 +7,10 @@ package com.norm.mysharedelementtransitionscompose
 
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionLayout
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -29,6 +34,10 @@ fun Home(
             startDestination = "list",
             modifier = Modifier
                 .fillMaxSize(),
+            enterTransition = { slideInHorizontally { it } + fadeIn() },
+            exitTransition = { slideOutHorizontally { -it } + fadeOut() },
+            popEnterTransition = { slideInHorizontally { -it } + fadeIn() },
+            popExitTransition = { slideOutHorizontally { it } + fadeOut() },
         ) {
             composable(
                 route = "list",

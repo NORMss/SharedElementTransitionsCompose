@@ -36,7 +36,6 @@ fun SharedTransitionScope.ItemsList(
             val width = 340 + itemIndex * 20
             val height = width * 4 / 3
             val url = "https://loremflickr.com/$width/$height"
-//            Log.d("MyLog", "Img url $url")
             Row(
                 modifier = Modifier
                     .clickable(
@@ -61,10 +60,18 @@ fun SharedTransitionScope.ItemsList(
                     contentDescription = null
                 )
                 Spacer(Modifier.size(16.dp))
-//                LoremIpsum(
-//                    modifier = Modifier.fillMaxWidth(),
-//                    maxLines = 3,
-//                )
+                MyText(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .sharedBounds(
+                            rememberSharedContentState(
+                                key = "text-$url"
+                            ),
+                            animatedVisibilityScope
+                        )
+                        .skipToLookaheadSize(),
+                    maxLines = 3,
+                )
             }
         }
     }
